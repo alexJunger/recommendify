@@ -6,6 +6,7 @@
 #include "version.h"
 #include "cc_item.h" 
 #include "jaccard.c" 
+#include "coconcurrent.c" 
 #include "cosine.c" 
 #include "output.c" 
 #include "sort.c" 
@@ -44,6 +45,9 @@ int main(int argc, char **argv){
 
   if(!strcmp(argv[1], "--cosine"))  
     similarityFunc = 2;
+  
+  if(!strcmp(argv[1], "--coconcurrent"))  
+    similarityFunc = 3;
 
   if(!similarityFunc){
     printf("invalid option: %s\n", argv[1]);
@@ -183,6 +187,9 @@ int main(int argc, char **argv){
 
   if(similarityFunc == 2)
     calculate_cosine(itemID, itemCount, cc_items, cc_items_size);
+  
+  if(similarityFunc == 3)
+    calculate_coconcurrent(itemID, itemCount, cc_items, cc_items_size);
 
   
   /* find the top x items with simple bubble sort */
